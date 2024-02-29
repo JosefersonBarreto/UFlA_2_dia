@@ -1,0 +1,789 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Índice}
+\else
+  \newcommand\contentsname{Índice}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Lista de Figuras}
+\else
+  \newcommand\listfigurename{Lista de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Lista de Tabelas}
+\else
+  \newcommand\listtablename{Lista de Tabelas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabela}
+\else
+  \newcommand\tablename{Tabela}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listagem}
+\newcommand*\listoflistings{\listof{codelisting}{Lista de Listagens}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{portuguese}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={   Análise Exploratória da produção de Leite de Três Vacas em uma fazenda},
+  pdfauthor={joseferson barreto, bacharel em estatística pela úniversidade Estadual da Paraíba; Dr.~Thiago Almeida, Universidade Estadual da Paraíba},
+  pdflang={pt},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\\
+\strut \\
+\strut \\
+Análise Exploratória da produção de Leite de Três Vacas em uma fazenda}
+\author{joseferson barreto, bacharel em estatística pela úniversidade
+Estadual da Paraíba \and Dr.~Thiago Almeida, Universidade Estadual da
+Paraíba}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Sumário}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{Carregando Algumas
+Bibliotecas}\label{carregando-algumas-bibliotecas}
+
+Primeiramente vamos carregar algumas bibliotecas que usaremos em nossas
+análises .
+
+\begin{itemize}
+\item
+  A biblioteca \textbf{readxl} Wickham e Bryan (2023) para ler o
+  conjunto de dados do excel.
+\item
+  A biblioteca \textbf{dplyr} Wickham et al. (2023) para algumas
+  manipulações no conjunto de dados.
+\item
+  A biblioteca \textbf{knitr} Xie (2023) para manipulações com latex e
+  afins.
+\item
+  A biblioteca \textbf{ggplot2} Wickham (2016) para geração de gráficos.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages("shinythemes")}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\#getwd()}
+\FunctionTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Carregando o Banco de
+Dados}\label{carregando-o-banco-de-dados}
+
+Carregando o banco de dados referente a produção de leite de 3 vacas em
+uma fazenda
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#teste\textless{}{-}read.table("C:/Users/joseferson/Documents/joseferson barreto/projeto{-}final{-}planejamento2/psubDBC.txt")}
+\NormalTok{ dados }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"dados.xlsx"}\NormalTok{) }
+\NormalTok{dados}\OtherTok{\textless{}{-}}\NormalTok{ dados[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+ \FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(dados, }\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllrrr@{}}
+\toprule\noalign{}
+racao\_Comun & Turno & mes & pasta\_bovin & soja & rep \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+26 & dia & primeiro mês & 41 & 41 & 1 \\
+26 & tarde & primeiro mês & 41 & 41 & 1 \\
+33 & dia & primeiro mês & 37 & 39 & 1 \\
+25 & tarde & primeiro mês & 40 & 37 & 1 \\
+29 & dia & primeiro mês & 37 & 39 & 1 \\
+34 & tarde & primeiro mês & 36 & 40 & 1 \\
+28 & dia & primeiro mês & 36 & 38 & 1 \\
+27 & tarde & primeiro mês & 40 & 41 & 1 \\
+29 & dia & primeiro mês & 37 & 37 & 1 \\
+32 & tarde & primeiro mês & 39 & 43 & 1 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#==================================================================================}
+\CommentTok{\#                      transformando os dados                                    \#}
+\CommentTok{\#==================================================================================}
+
+
+\CommentTok{\# Criar a nova variável "dia\_mes"}
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(mes) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{dia\_mes =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"dia "}\NormalTok{, }\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{, }\AttributeTok{each =} \DecValTok{2}\NormalTok{)), }\AttributeTok{length.out =} \FunctionTok{n}\NormalTok{())}
+\NormalTok{  )}
+
+\CommentTok{\# Visualizar os dados resultantes}
+\CommentTok{\#print(dados)}
+
+
+
+\CommentTok{\# Criar a nova variável "dia\_mes\_com\_mes"}
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dia\_mes\_com\_mes =} \FunctionTok{paste}\NormalTok{(dia\_mes, mes, }\AttributeTok{sep =} \StringTok{" "}\NormalTok{))}
+
+\CommentTok{\# Criando vetores vazios para armazenar os dados e a identificação da variável}
+\NormalTok{prod }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\NormalTok{variavel }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+
+\CommentTok{\# Número total de observações e de variáveis}
+\NormalTok{num\_observacoes }\OtherTok{\textless{}{-}} \DecValTok{360}
+\NormalTok{variaveis }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"soja"}\NormalTok{, }\StringTok{"pasta\_bovin"}\NormalTok{, }\StringTok{"racao\_Comun"}\NormalTok{)}
+\NormalTok{num\_variaveis }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(variaveis)}
+
+\CommentTok{\# Loop para preencher as variáveis prod e variavel}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(num\_observacoes}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)) \{}
+  \CommentTok{\# Iteração sobre as variáveis}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{num\_variaveis) \{}
+    \CommentTok{\# Adicionando duas observações da variável atual}
+\NormalTok{    prod }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(prod, dados[[variaveis[j]]][((i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \DecValTok{2} \SpecialCharTok{+} \DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(i }\SpecialCharTok{*} \DecValTok{2}\NormalTok{)])}
+    
+    \CommentTok{\# Adicionando a identificação da variável}
+\NormalTok{    variavel }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(variavel, }\FunctionTok{rep}\NormalTok{(variaveis[j], }\DecValTok{2}\NormalTok{))}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\CommentTok{\# \# Verificando os resultados}
+\CommentTok{\# head(prod)}
+\CommentTok{\# head(variavel)}
+
+
+
+
+
+
+\NormalTok{banco}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{prod=}\FunctionTok{c}\NormalTok{(prod),}\AttributeTok{turno=}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{Turno,}
+\NormalTok{              dados}\SpecialCharTok{$}\NormalTok{Turno,dados}\SpecialCharTok{$}\NormalTok{Turno)),}\AttributeTok{blocos=}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{rep,}
+\NormalTok{                  dados}\SpecialCharTok{$}\NormalTok{rep,dados}\SpecialCharTok{$}\NormalTok{rep))) }\CommentTok{\#, dias = c(dados$dia\_mes\_com\_mes,}
+                 \CommentTok{\# dados$dia\_mes\_com\_mes,dados$dia\_mes\_com\_mes))}
+
+
+
+\NormalTok{banco}\SpecialCharTok{$}\NormalTok{tipos\_rações}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(variavel))}
+
+
+
+\NormalTok{banco}\SpecialCharTok{$}\NormalTok{prod}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(banco}\SpecialCharTok{$}\NormalTok{prod)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Observação}
+
+para mais temas e costomisações confira a documentação da biblioteca
+\textbf{shinythemes} Chang (2021)
+
+\subsection{Exibindo o Dataset Final}\label{exibindo-o-dataset-final}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p}\OtherTok{\textless{}{-}}\NormalTok{banco }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(tipos\_rações,turno,blocos,prod) }
+\NormalTok{banco }\OtherTok{\textless{}{-}}\NormalTok{p}
+\NormalTok{banco1 }\OtherTok{\textless{}{-}}\NormalTok{ banco}
+
+\FunctionTok{colnames}\NormalTok{(banco1)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"tipo rações"}\NormalTok{,}\StringTok{"Turno"}\NormalTok{,}\StringTok{"Bloco"}\NormalTok{, }\StringTok{\textquotesingle{}prod\textquotesingle{}}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(banco1, }\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllr@{}}
+\toprule\noalign{}
+tipo rações & Turno & Bloco & prod \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+soja & dia & 1 & 41 \\
+soja & tarde & 1 & 41 \\
+pasta\_bovin & dia & 1 & 41 \\
+pasta\_bovin & tarde & 1 & 41 \\
+racao\_Comun & dia & 1 & 26 \\
+racao\_Comun & tarde & 1 & 26 \\
+soja & dia & 1 & 39 \\
+soja & tarde & 1 & 37 \\
+pasta\_bovin & dia & 1 & 37 \\
+pasta\_bovin & tarde & 1 & 40 \\
+\end{longtable}
+
+\begin{longtable}[]{@{}lllr@{}}
+\caption{fonte: Joseferson Barreto}\tabularnewline
+\toprule\noalign{}
+tipo rações & Turno & Bloco & prod \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+tipo rações & Turno & Bloco & prod \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+soja & dia & 1 & 41 \\
+soja & tarde & 1 & 41 \\
+pasta\_bovin & dia & 1 & 41 \\
+pasta\_bovin & tarde & 1 & 41 \\
+racao\_Comun & dia & 1 & 26 \\
+racao\_Comun & tarde & 1 & 26 \\
+soja & dia & 1 & 39 \\
+soja & tarde & 1 & 37 \\
+pasta\_bovin & dia & 1 & 37 \\
+pasta\_bovin & tarde & 1 & 40 \\
+\end{longtable}
+
+\subsection{Fazendo a análise
+exploratória}\label{fazendo-a-anuxe1lise-exploratuxf3ria}
+
+Vamos fazer a análise exploratória,primeiramente vamos observar osn
+tipos de variáveis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#| label: fig{-}pressure}
+\CommentTok{\#| fig{-}cap: "Pressure"}
+\CommentTok{\#| code{-}fold: true}
+
+\CommentTok{\# converter  a variável prod para númerica }
+
+\NormalTok{banco}\SpecialCharTok{$}\NormalTok{prod }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(banco}\SpecialCharTok{$}\NormalTok{prod)}
+
+
+\NormalTok{banco }\SpecialCharTok{|\textgreater{}} \FunctionTok{glimpse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 1,080
+Columns: 4
+$ tipos_rações <fct> soja, soja, pasta_bovin, pasta_bovin, racao_Comun, racao_~
+$ turno        <fct> dia, tarde, dia, tarde, dia, tarde, dia, tarde, dia, tard~
+$ blocos       <fct> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ~
+$ prod         <int> 41, 41, 41, 41, 26, 26, 39, 37, 37, 40, 33, 25, 39, 40, 3~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#| label: fig{-}pressure}
+\CommentTok{\#| fig{-}cap: "Pressure"}
+\CommentTok{\#| code{-}fold: true}
+
+
+
+\CommentTok{\# library(ggplot2)}
+\CommentTok{\# }
+\CommentTok{\# ggplot(data = banco, aes(x = turno,y = tipos\_rações)) +}
+\CommentTok{\#   geom\_bar() +}
+\CommentTok{\#   labs(title = "Distribuição da Variável Turno",}
+\CommentTok{\#        x = "Turno",}
+\CommentTok{\#        y = "Contagem")}
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# ggplot(data = banco, aes(x = turno, fill = tipos\_rações)) +}
+\CommentTok{\#   group\_by(tipos\_rações)+}
+\CommentTok{\#   geom\_bar(position = "stack") +}
+\CommentTok{\#   labs(title = "Distribuição de Turno por Tipos de Rações",}
+\CommentTok{\#        x = "Turno",}
+\CommentTok{\#        y = "Contagem",}
+\CommentTok{\#        fill = "Tipos de Rações")}
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# ggplot(data = banco, aes(x = turno, fill = tipos\_rações)) +}
+\CommentTok{\#   geom\_bar(position = "stack") +}
+\CommentTok{\#   labs(title = "Distribuição de Turno por Tipos de Rações",}
+\CommentTok{\#        x = "Turno",}
+\CommentTok{\#        y = "Contagem",}
+\CommentTok{\#        fill = "Tipos de Rações")}
+
+\CommentTok{\#install.packages("moments",dependencies = TRUE)}
+\FunctionTok{library}\NormalTok{(moments)}
+
+\NormalTok{descritiva }\OtherTok{\textless{}{-}}\NormalTok{ banco }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\StringTok{"Média produção"} \OtherTok{=} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(prod, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\DecValTok{2}\NormalTok{)),}
+            \StringTok{"Mediana produção"} \OtherTok{=} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{median}\NormalTok{(prod, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\DecValTok{2}\NormalTok{)),}
+            \StringTok{"Assimétria"} \OtherTok{=} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{skewness}\NormalTok{(prod, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\DecValTok{2}\NormalTok{)),}
+            \StringTok{"Curtose"} \OtherTok{=} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.2f"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{kurtosis}\NormalTok{(prod, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\DecValTok{2}\NormalTok{)))}
+
+\CommentTok{\#============================================================================}
+\CommentTok{\#                   observação}
+\CommentTok{\#============================================================================}
+
+
+\CommentTok{\# A função sprintf("\%.2f") formata a saida dos resultados para que os zeros após a virgula sejam exibidos }
+
+
+\NormalTok{descritiva }\SpecialCharTok{|\textgreater{}} \FunctionTok{kable}\NormalTok{(}\AttributeTok{align =} \StringTok{"c"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule\noalign{}
+Média produção & Mediana produção & Assimétria & Curtose \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+24.50 & 28.00 & -0.28 & 1.67 \\
+\end{longtable}
+
+\subsubsection{Interpretando os
+Resultados}\label{interpretando-os-resultados}
+
+\begin{itemize}
+\item
+  \emph{Média}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Logo , podemos afirmar que a média da produção de leite dessas 3
+    vagas ao longo dos 6 meses foi de 24,50 litros
+  \end{itemize}
+\item
+  \emph{Mediana}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A mediana da produção de leite dessas 3 vagas juntas foi de 28
+    litros ao longo desses 6 meses
+  \end{itemize}
+\end{itemize}
+
+\emph{Assimétria}
+
+\begin{itemize}
+\tightlist
+\item
+  Note que o coeficiente de assimétria foi de -0,28 , isso indica que
+  temos uma ,\textbf{Assimetria negativa}: A distribuição é inclinada
+  para a esquerda, indicando que há uma dispersão maior de valores
+  menores em relação aos valores maiores.
+\end{itemize}
+
+Exemplos comuns de distribuições assimétricas à esquerda incluem
+distribuições de tempo de espera em uma fila, distribuições de tempo de
+vida de produtos.
+
+\begin{itemize}
+\item
+  \emph{Curtose}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    o Valor da curtose em nosso conjunto de dados foi de 1,67.
+  \end{itemize}
+
+  A Curtose é uma medida estatística que descreve a forma da
+  distribuição de probabilidade de uma variável aleatória. Ela compara a
+  distribuição de uma variável com a distribuição normal padrão. A
+  curtose de uma distribuição normal padrão é definida como 3.
+
+  Se \(K >3\) a distribuição é mais ``pontiaguda'' e ``pesada'' nas
+  caudas do que uma distribuição normal, e é chamada de leptocúrtica.
+
+  Se \(K < 3\) a distribuição é mais ``achatada'' do que uma
+  distribuição normal, e é chamada de platicúrtica.
+
+  Se \(K = 3\) a distribuição é chamada de mesocúrtica e tem a mesma
+  curtose da distribuição normal.
+
+  Logo, podemos afirmar que nossa siatribuição é mais achatada que a
+  distribuição normal, oe seja , ela é platicúrtica.
+\item
+  \emph{Moda}
+\end{itemize}
+
+A moda é lor que ocorre com mais frequência em uma distribuição de
+dados. Vamos utilizar o código abaixo para calcular a moda:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#| label: fig{-}pressure}
+\CommentTok{\#| fig{-}cap: "Pressure"}
+\CommentTok{\#| code{-}fold: true}
+
+
+
+\NormalTok{banco }\SpecialCharTok{|\textgreater{}}  \FunctionTok{select}\NormalTok{(prod)  }\SpecialCharTok{\%\textgreater{}\%} 
+
+                 \FunctionTok{table}\NormalTok{()     }\SpecialCharTok{\%\textgreater{}\%}
+
+                 \FunctionTok{which.max}\NormalTok{ () }\SpecialCharTok{\%\textgreater{}\%} 
+
+                 \FunctionTok{names}\NormalTok{ ()     }\SpecialCharTok{\%\textgreater{}\%}  
+
+                 \FunctionTok{as.numeric}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 35
+\end{verbatim}
+
+Note que a moda foi maior que a média e a mediana ou seja
+\(\text{Moda} > \text{Mediana} > \text{Média}\) isso indica que temos
+uma Assimétria negátiva como vimos anteriomente .
+
+Logo, com essas características apresentadas pode-se dizer que nossa
+variável resposta não segue a distribução normal,vamos mostrar em um
+histograma
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#| label: fig{-}pressure}
+\CommentTok{\#| fig{-}cap: "Pressure"}
+\CommentTok{\#| code{-}fold: true}
+
+
+\CommentTok{\#hist(banco$prod)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{banco\_summary }\OtherTok{\textless{}{-}}\NormalTok{ banco }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(turno, tipos\_rações) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Contagem =} \FunctionTok{n}\NormalTok{())}
+
+\CommentTok{\# ggplot(data = banco\_summary, aes(x = turno, y = Contagem, fill = tipos\_rações)) +}
+\CommentTok{\#   geom\_histogram(stat = "identity", position = "dodge") +}
+\CommentTok{\#   geom\_density(aes(color = tipos\_rações), size = 1.5) +  \# Adiciona a curva da densidade}
+\CommentTok{\#   labs(title = "Distribuição de Turno por Tipos de Rações",}
+\CommentTok{\#        x = "Turno",}
+\CommentTok{\#        y = "Contagem",}
+\CommentTok{\#        fill = "Tipos de Rações",}
+\CommentTok{\#        color = "Tipos de Rações")  \# Adiciona a legenda para a curva da densidade}
+
+
+
+\CommentTok{\# Assuming \textquotesingle{}produção\textquotesingle{} is the variable representing production in your dataset}
+
+\CommentTok{\# Load necessary libraries}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# \# Create a histogram of production with density curve}
+\CommentTok{\# ggplot(data = banco, aes(x = prod)) +}
+\CommentTok{\#   geom\_histogram(binwidth = 1, fill = "lightblue", color = "black", alpha = 0.7) +  \# Adjust binwidth and transparency}
+\CommentTok{\#   geom\_density(alpha = 0.8, fill = "\#FF6500") +  \# Add density curve with color and transparency}
+\CommentTok{\#   labs(title = "Histograma da Produção", x = "Produção", y = "Densidade") +}
+\CommentTok{\#   theme\_minimal() }
+
+
+\CommentTok{\# ggplot(data = banco, aes(x = prod))+}
+\CommentTok{\#   geom\_histogram() +  }
+\CommentTok{\# geom\_density(position = "identity")}
+
+
+
+
+
+
+
+
+\CommentTok{\# Calculate mean and standard deviation of your data}
+\NormalTok{mean\_value }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(banco}\SpecialCharTok{$}\NormalTok{prod)}
+\NormalTok{sd\_value }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(banco}\SpecialCharTok{$}\NormalTok{prod)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(banco) }\CommentTok{\# Number of observations}
+\NormalTok{lagura }\OtherTok{\textless{}{-}}\NormalTok{ binwidth }\OtherTok{\textless{}{-}}\DecValTok{1}  \CommentTok{\# Assuming you have defined binwidth earlier}
+
+\NormalTok{autor }\OtherTok{\textless{}{-}} \StringTok{"joseferson Barreto"}
+\NormalTok{ano }\OtherTok{\textless{}{-}}\StringTok{"2024"}
+\CommentTok{\# Create a histogram of production with density curve and normal curve}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ banco, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ prod)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =}\NormalTok{ binwidth, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{fill =} \StringTok{"\#FFA500"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_function}\NormalTok{(}\AttributeTok{fun =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{dnorm}\NormalTok{(x, }\AttributeTok{mean =}\NormalTok{ mean\_value, }\AttributeTok{sd =}\NormalTok{ sd\_value) }\SpecialCharTok{*}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ lagura, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Histograma da Produção com Curva Normal"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Produção"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Densidade"}\NormalTok{, }\AttributeTok{caption =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Fonte: Elaborada pelo Autor,"}\NormalTok{, ano)) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill=}\StringTok{\textquotesingle{}\#a0a88a\textquotesingle{}}\NormalTok{, }\AttributeTok{colour=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{),}
+        \AttributeTok{plot.caption =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exploratory_files/figure-pdf/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#shapiro.test(banco$prod)}
+\end{Highlighting}
+\end{Shaded}
+
+Como pode-se observar , a distribuição dos nossos dados apresenta um
+achatamento maior que da distribuição normal, logo , podemos afirmar que
+a variável \textbf{prod} não segue a distruição normal. outra forma de
+observar isso , é pelo teste de Shapiro Wilk Shapiro e Wilk (1965)
+
+\subsection{Teste De Shapiro Wilk}\label{teste-de-shapiro-wilk}
+
+\subsubsection{Hipóteses do teste}\label{hipuxf3teses-do-teste}
+
+\hfill\break
+
+\begin{cases}
+\text{H0:Os erros têm distribuição normal;   $\hspace{1,55cm}$            se $\alpha$ > 0,05} \\
+\text{H1:Os erros não têm distribuição normal;  $\hspace{1cm}$        se  $\alpha$ < 0,05}
+\end{cases}
+
+\hfill\break
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(banco}\SpecialCharTok{$}\NormalTok{prod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  banco$prod
+W = 0.9178, p-value < 2.2e-16
+\end{verbatim}
+
+Como o \(P\_{valor} < \alpha = 0,05\) temos que nossa variável não segue
+a distribuição normal.
+
+\section*{Referências}\label{referuxeancias}
+\addcontentsline{toc}{section}{Referências}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-shinythemes}
+Chang, Winston. 2021. {«shinythemes: Themes for Shiny»}.
+\url{https://CRAN.R-project.org/package=shinythemes}.
+
+\bibitem[\citeproctext]{ref-shapiro1965}
+Shapiro, S. S., e M. B. Wilk. 1965. {«An analysis of variance test for
+normality (complete samples)»}. \emph{Biometrika} 52: 591--611.
+\url{https://doi.org/10.2307/2333709}.
+
+\bibitem[\citeproctext]{ref-ggplot2}
+Wickham, Hadley. 2016. {«ggplot2: Elegant Graphics for Data Analysis»}.
+\url{https://ggplot2.tidyverse.org}.
+
+\bibitem[\citeproctext]{ref-readxl}
+Wickham, Hadley, e Jennifer Bryan. 2023. {«readxl: Read Excel Files»}.
+\url{https://CRAN.R-project.org/package=readxl}.
+
+\bibitem[\citeproctext]{ref-dplyr}
+Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, e Davis
+Vaughan. 2023. {«dplyr: A Grammar of Data Manipulation»}.
+\url{https://CRAN.R-project.org/package=dplyr}.
+
+\bibitem[\citeproctext]{ref-knitr-2}
+Xie, Yihui. 2023. {«knitr: A General-Purpose Package for Dynamic Report
+Generation in R»}. \url{https://yihui.org/knitr/}.
+
+\end{CSLReferences}
+
+
+
+\end{document}

@@ -1,0 +1,450 @@
+---
+title:  <p style="text-align:center"><img src="https://ufla.br/images/noticias/2023/00_SELOS/ufla_reitoria.JPG" width="1000" height="360" /></p> Análise Exploratória da produção de Leite de Três Vacas em uma fazenda 
+#   
+#   
+#   Planejamento e e Análise de experimentos <font color='white' face="Roman">II </font>-Relatório Final  <font color='white' face="Roman">I </font>"Análise Exploratória"
+lang: pt
+author:
+  - joseferson barreto, bacharel em estatística pela úniversidade Estadual da Paraíba
+  
+  - Dr. Tiago Almeida, Universidade Estadual da Paraíba
+format:
+  html:
+    code-fold: true
+    css: styles.css
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+    toc_depth: 3
+    toc-title: "Sumário"
+    #theme: DARKLYasas
+    # includes:
+    #   in_header: scripts.js
+bibliography: references.bib 
+editor: visual
+---
+
+<!-- <div class="quarto-title-meta-heading">autor: Joseferson Barreto</div> -->
+
+# Carregando Algumas Bibliotecas
+
+Primeiramente vamos carregar algumas bibliotecas que usaremos em nossas análises.
+
+-   A biblioteca **readxl** @readxl para ler o conjunto de dados do excel.
+
+-   A biblioteca **dplyr** @dplyr para algumas manipulações no conjunto de dados.
+
+-   A biblioteca **knitr** @knitr-2 para manipulações com latex e afins.
+
+-   A biblioteca **ggplot2** @ggplot2 para geração de gráficos.
+
+```{r,warning=FALSE,message=FALSE}
+#|  label: bibliotecas
+
+#install.packages("shinythemes")
+library(readxl)
+library(dplyr)
+#getwd()
+library(knitr)
+```
+
+## Carregando o Banco de Dados
+
+Carregando o banco de dados referente a produção de leite de 3 vacas em uma fazenda
+
+```{r,warning=FALSE,message=FALSE}
+#| label: dataset
+
+
+#teste<-read.table("C:/Users/joseferson/Documents/joseferson barreto/projeto-final-planejamento2/psubDBC.txt")
+ dados <- read_excel("dados.xlsx") 
+dados<- dados[-1]
+ library(knitr)
+kable(head(dados, 10))
+
+#==================================================================================
+#                      transformando os dados                                    #
+#==================================================================================
+
+
+# Criar a nova variável "dia_mes"
+dados <- dados %>%
+  group_by(mes) %>%
+  mutate(
+    dia_mes = rep(paste0("dia ", rep(1:30, each = 2)), length.out = n())
+  )
+
+# Visualizar os dados resultantes
+#print(dados)
+
+
+
+# Criar a nova variável "dia_mes_com_mes"
+dados <- dados %>%
+  mutate(dia_mes_com_mes = paste(dia_mes, mes, sep = " "))
+
+# Criando vetores vazios para armazenar os dados e a identificação da variável
+prod <- c()
+variavel <- c()
+
+# Número total de observações e de variáveis
+num_observacoes <- 360
+variaveis <- c("soja", "pasta_bovin", "racao_Comun")
+num_variaveis <- length(variaveis)
+
+# Loop para preencher as variáveis prod e variavel
+for (i in 1:(num_observacoes/2)) {
+  # Iteração sobre as variáveis
+  for (j in 1:num_variaveis) {
+    # Adicionando duas observações da variável atual
+    prod <- c(prod, dados[[variaveis[j]]][((i - 1) * 2 + 1):(i * 2)])
+    
+    # Adicionando a identificação da variável
+    variavel <- c(variavel, rep(variaveis[j], 2))
+  }
+}
+
+# # Verificando os resultados
+# head(prod)
+# head(variavel)
+
+
+
+
+
+
+banco<-data.frame(prod=c(prod),turno=as.factor(c(dados$Turno,
+              dados$Turno,dados$Turno)),blocos=as.factor(c(dados$rep,
+                  dados$rep,dados$rep))) #, dias = c(dados$dia_mes_com_mes,
+                 # dados$dia_mes_com_mes,dados$dia_mes_com_mes))
+
+
+
+banco$tipos_rações<-as.factor(c(variavel))
+
+
+
+banco$prod<-as.numeric(banco$prod)
+```
+
+**Observação**
+
+para mais temas e costomisações confira a documentação da biblioteca **shinythemes** @shinythemes
+
+## Exibindo o Dataset Final
+
+```{r,warning=FALSE,message=FALSE}
+#| label: final_dataset
+p<-banco |> select(tipos_rações,turno,blocos,prod) 
+banco <-p
+banco1 <- banco
+
+colnames(banco1)<-c("tipo rações","Turno","Bloco", 'prod')
+
+#kable(head(banco1, 10))
+
+```
+
+| tipo rações | Turno | Bloco | prod |
+|:------------|:------|:------|-----:|
+| soja        | dia   | 1     |   41 |
+| soja        | tarde | 1     |   41 |
+| pasta_bovin | dia   | 1     |   41 |
+| pasta_bovin | tarde | 1     |   41 |
+| racao_Comun | dia   | 1     |   26 |
+| racao_Comun | tarde | 1     |   26 |
+| soja        | dia   | 1     |   39 |
+| soja        | tarde | 1     |   37 |
+| pasta_bovin | dia   | 1     |   37 |
+| pasta_bovin | tarde | 1     |   40 |
+
+: fonte: Joseferson Barreto
+
+## Fazendo a análise exploratória
+
+Vamos fazer a análise exploratória,primeiramente vamos observar osn tipos de variáveis
+
+```{r,warning=FALSE,message=FALSE}
+
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true
+
+# converter  a variável prod para númerica 
+
+banco$prod <- as.integer(banco$prod)
+
+
+banco |> glimpse()
+
+```
+
+```{r,warning=FALSE,message=FALSE}
+
+
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true
+
+
+
+# library(ggplot2)
+# 
+# ggplot(data = banco, aes(x = turno,y = tipos_rações)) +
+#   geom_bar() +
+#   labs(title = "Distribuição da Variável Turno",
+#        x = "Turno",
+#        y = "Contagem")
+# 
+# 
+# 
+# ggplot(data = banco, aes(x = turno, fill = tipos_rações)) +
+#   group_by(tipos_rações)+
+#   geom_bar(position = "stack") +
+#   labs(title = "Distribuição de Turno por Tipos de Rações",
+#        x = "Turno",
+#        y = "Contagem",
+#        fill = "Tipos de Rações")
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# ggplot(data = banco, aes(x = turno, fill = tipos_rações)) +
+#   geom_bar(position = "stack") +
+#   labs(title = "Distribuição de Turno por Tipos de Rações",
+#        x = "Turno",
+#        y = "Contagem",
+#        fill = "Tipos de Rações")
+
+#install.packages("moments",dependencies = TRUE)
+library(moments)
+
+descritiva <- banco %>%
+  summarise("Média produção" = sprintf("%.2f", round(mean(prod, na.rm = TRUE), 2)),
+            "Mediana produção" = sprintf("%.2f", round(median(prod, na.rm = TRUE), 2)),
+            "Assimétria" = sprintf("%.2f", round(skewness(prod, na.rm = TRUE), 2)),
+            "Curtose" = sprintf("%.2f", round(kurtosis(prod, na.rm = TRUE), 2)))
+
+#============================================================================
+#                   observação
+#============================================================================
+
+
+# A função sprintf("%.2f") formata a saida dos resultados para que os zeros após a virgula sejam exibidos 
+
+
+descritiva |> kable(align = "c")
+
+```
+
+### Interpretando os Resultados
+
+-   *Média*
+
+    <div>
+
+    -   Logo , podemos afirmar que a média da produção de leite dessas 3 vagas ao longo dos 6 meses foi de 24,50 litros
+
+    </div>
+
+-   *Mediana*
+
+    <div>
+
+    -   A mediana da produção de leite dessas 3 vagas juntas foi de 28 litros ao longo desses 6 meses
+
+    </div>
+
+*Assimétria*
+
+<div>
+
+-   Note que o coeficiente de assimétria foi de -0,28 , isso indica que temos uma ,**Assimetria negativa**: A distribuição é inclinada para a esquerda, indicando que há uma dispersão maior de valores menores em relação aos valores maiores.
+
+Exemplos comuns de distribuições assimétricas à esquerda incluem distribuições de tempo de espera em uma fila, distribuições de tempo de vida de produtos.
+
+</div>
+
+-   *Curtose*
+
+    <div>
+
+    -   o Valor da curtose em nosso conjunto de dados foi de 1,67.
+
+    </div>
+
+    A Curtose é uma medida estatística que descreve a forma da distribuição de probabilidade de uma variável aleatória. Ela compara a distribuição de uma variável com a distribuição normal padrão. A curtose de uma distribuição normal padrão é definida como 3.
+
+    <div>
+
+    Se $K >3$ a distribuição é mais "pontiaguda" e "pesada" nas caudas do que uma distribuição normal, e é chamada de leptocúrtica.
+
+    </div>
+
+    Se $K < 3$ a distribuição é mais "achatada" do que uma distribuição normal, e é chamada de platicúrtica.
+
+    Se $K = 3$ a distribuição é chamada de mesocúrtica e tem a mesma curtose da distribuição normal.
+
+    Logo, podemos afirmar que nossa siatribuição é mais achatada que a distribuição normal, oe seja , ela é platicúrtica.
+
+-   *Moda*
+
+A moda é lor que ocorre com mais frequência em uma distribuição de dados. Vamos utilizar o código abaixo para calcular a moda:
+
+```{r,message=FALSE,warning=FALSE}
+
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true
+
+
+
+banco |>  select(prod)  %>% 
+
+                 table()     %>%
+
+                 which.max () %>% 
+
+                 names ()     %>%  
+
+                 as.numeric()
+```
+
+Note que a moda foi maior que a média e a mediana ou seja $\text{Moda} > \text{Mediana} > \text{Média}$ isso indica que temos uma Assimétria negátiva como vimos anteriomente .
+
+Logo, com essas características apresentadas pode-se dizer que nossa variável resposta não segue a distribução normal,vamos mostrar em um histograma
+
+```{r,warning=FALSE,message=FALSE}
+
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true
+
+
+#hist(banco$prod)
+library(dplyr)
+library(ggplot2)
+
+banco_summary <- banco %>%
+  group_by(turno, tipos_rações) %>%
+  summarize(Contagem = n())
+
+# ggplot(data = banco_summary, aes(x = turno, y = Contagem, fill = tipos_rações)) +
+#   geom_histogram(stat = "identity", position = "dodge") +
+#   geom_density(aes(color = tipos_rações), size = 1.5) +  # Adiciona a curva da densidade
+#   labs(title = "Distribuição de Turno por Tipos de Rações",
+#        x = "Turno",
+#        y = "Contagem",
+#        fill = "Tipos de Rações",
+#        color = "Tipos de Rações")  # Adiciona a legenda para a curva da densidade
+
+
+
+# Assuming 'produção' is the variable representing production in your dataset
+
+# Load necessary libraries
+library(ggplot2)
+
+# # Create a histogram of production with density curve
+# ggplot(data = banco, aes(x = prod)) +
+#   geom_histogram(binwidth = 1, fill = "lightblue", color = "black", alpha = 0.7) +  # Adjust binwidth and transparency
+#   geom_density(alpha = 0.8, fill = "#FF6500") +  # Add density curve with color and transparency
+#   labs(title = "Histograma da Produção", x = "Produção", y = "Densidade") +
+#   theme_minimal() 
+
+
+# ggplot(data = banco, aes(x = prod))+
+#   geom_histogram() +  
+# geom_density(position = "identity")
+
+
+
+
+
+
+
+
+# Calculate mean and standard deviation of your data
+mean_value <- mean(banco$prod)
+sd_value <- sd(banco$prod)
+n <- nrow(banco) # Number of observations
+lagura <- binwidth <-1  # Assuming you have defined binwidth earlier
+
+autor <- "joseferson Barreto"
+ano <-"2024"
+# Create a histogram of production with density curve and normal curve
+ggplot(data = banco, aes(x = prod)) +
+  geom_histogram(binwidth = binwidth, fill = "lightblue", color = "black", alpha = 0.7) +
+  geom_density(alpha = 0.3, fill = "#FFA500") +
+  stat_function(fun = function(x) dnorm(x, mean = mean_value, sd = sd_value) * n * lagura, color = "red", size = 1) +
+  labs(title = "Histograma da Produção com Curva Normal", x = "Produção", y = "Densidade", caption = paste("Fonte: Elaborada pelo Autor,", ano)) +
+  theme(panel.background = element_rect(fill='#a0a88a', colour='red'),
+        plot.caption = element_text(hjust = 0.5),
+        plot.title = element_text(hjust = 0.5))
+
+
+
+#shapiro.test(banco$prod)
+
+
+```
+
+Como pode-se observar , a distribuição dos nossos dados apresenta um achatamento maior que da distribuição normal, logo , podemos afirmar que a variável **prod** não segue a distruição normal. outra forma de observar isso , é pelo teste de Shapiro Wilk @shapiro1965
+
+## Teste De Shapiro Wilk
+
+### Hipóteses do teste
+
+\
+
+```{=tex}
+\begin{cases}
+\text{H0:Os erros têm distribuição normal;   $\hspace{1,55cm}$            se $\alpha$ > 0,05} \\
+\text{H1:Os erros não têm distribuição normal;  $\hspace{1cm}$        se  $\alpha$ < 0,05}
+\end{cases}
+```
+\
+
+```{r,warning=FALSE,message=FALSE}
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true
+
+
+shapiro.test(banco$prod)
+
+```
+
+Como o $P\_{valor} < \alpha = 0,05$ temos que nossa variável não segue a distribuição normal.
+
+# Referências {.unnumbered}
+
+<!-- ## Variável Resposta (PROD) -->
+
+<!-- Primeiramente vamos observar a amplitude em nossos dados -->
+
+<!-- ```{r,warning=FALSE,message=FALSE} -->
+
+<!-- # Calculo da amplitude  -->
+
+<!-- #| label: fig-pressure -->
+
+<!-- #| fig-cap: "Pressure" -->
+
+<!-- #| code-fold: true -->
+
+<!-- R = (max(banco$prod, na.rm = TRUE)-min(banco$prod, na.rm = TRUE)) -->
+
+<!-- R -->
+
+<!-- 43/3 -->
+
+<!-- max(banco$prod)  -->
+
+<!-- ``` -->
+
+<!-- Proximo passo é encontar a média, a moda e a médiana -->

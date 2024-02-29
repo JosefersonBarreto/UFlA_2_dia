@@ -1,0 +1,216 @@
+/*-- scss:defaults --*/
+
+// fonts
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@700&display=swap');
+
+$font-family-sans-serif: "Atkinson Hyperlegible";
+
+// colors
+
+$navbar-bg: #0e2635;
+$navbar-fg: #F0F0F0;
+
+$link-color: #ae8b2d;
+$hover-color: lighten($link-color, 40%);
+
+/*-- scss:rules --*/
+.card-header {
+  /*background-color: #F0F0F0; */
+  /*border-bottom: 1px solid #0a304b; */
+  background-color: #082137;
+}
+
+
+.card-header {
+    /*border-bottom: 10px solid #635f2e;
+    background-color: #082137;
+    padding: px 12px;   */
+    border: 5px solid #563600;
+}
+
+.nav-item > a:hover {
+  color: #ae8b2d;
+}
+
+.nav-link{
+  color: #F0F0F0;
+
+}
+
+.card-body {
+    z-index: 1000;
+    background-color: #172155;
+} /* adiciona a peosonilização do corpo do documento */
+
+.html-fill-item {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+    color: #dbd5db;
+    border: 0px solid #563600;
+} /* <-- adiciona a personilização de texto em todo corpo */
+
+
+.main {
+    grid-column: 2/3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: var(--bslib-sidebar-padding);
+    transition: padding var(--bslib-sidebar-transition-easing-x) var(--bslib-sidebar-transition-duration);
+    color: var(--bslib-sidebar-main-fg);
+    background-color: #030636;
+    border: 0px solid #563600;
+}
+
+.html-fill-container>.html-fill-item {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+    border: 0px solid #563600;
+   
+} /* configura pra todo o corpo */
+
+.bslib-grid {
+    display: grid !important;
+    gap: var(--bslib-spacer, 1rem);
+    height: var(--bslib-grid-height);
+    background-color: #080d2f;
+    border: 2px solid #434343;
+}
+
+.bslib-sidebar-layout>.main {
+    grid-column: 2/3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: var(--bslib-sidebar-padding);
+    transition: padding var(--bslib-sidebar-transition-easing-x) var(--bslib-sidebar-transition-duration);
+    color: var(--bslib-sidebar-main-fg);
+    background-color: #080d2f;
+    border: 2px solid #434343;
+}  /*  configurando a espeçura do graficos */
+
+
+
+
+/*.bslib-sidebar-layout>.main {
+    grid-column: 2/3;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: var(--bslib-sidebar-padding);
+    transition: padding var(--bslib-sidebar-transition-easing-x) var(--bslib-sidebar-transition-duration);
+    color: #96b51a;
+    background-color: #505995;
+    border: 2px solid #6d5858;
+}
+*/
+
+div.datatables {
+    color: #fff;
+}
+
+
+
+.dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
+    vertical-align: middle;
+    color: #f5f9f9;
+}
+
+div.callout-note.callout {
+  border-left-color: #0e2635;
+}
+
+div.callout-note.callout-style-default>.callout-header {
+  background-color: #0a304b;
+}
+
+.bslib-value-box.showcase-left-center:not([data-fill-screen=true]) .value-box-grid .value-box-showcase {
+    grid-area: left;
+    border-left: 8px solid #534419;
+    border-top-width: 9px;
+    border-bottom-width: 9px;
+    border-top-color: #857546;
+    border-bottom-color: #534419;
+    
+}  /*--configuração das  caixas*/
+
+
+/*
+.bslib-value-box.showcase-left-center:not([data-fill-screen=true]) .value-box-grid .value-box-area {
+    grid-area: right;
+    border: 3px solid #534419;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: rgb(83, 68, 25);
+    border-right-color: rgb(83, 68, 25);
+    border-bottom-color: rgb(83, 68, 25);
+    border-left-color: rgb(83, 68, 25);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+}*/
+/*-- scss:defaults --*/
+
+
+.bslib-value-box.showcase-left-center:not([data-fill-screen=true]) .value-box-grid .value-box-area {
+    grid-area: right;
+    border: px solid #efb612;
+    border-top-width: 9px;
+    border-right-width: 9px;
+    border-bottom-width: 9px;
+    border-left-width: 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #857546;
+    border-right-color: #534419;
+    border-bottom-color: #534419;
+    border-left-color: #534419;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+}  /*configuração das caixas boxs */ 
+
+
+div.datatables {
+    color: #d7d2d2;
+}
+
+
+
+
+
+// ... (existing code)
+
+// Additional colors for the dashboard
+$dashboard-bg: #082137;  // Adjust this color to your desired lilac shade
+$image-border: #082137;  // Adjust this color for the border of images
+$chart-bg: 'green';      // Adjust this color for the background of charts
+
+/*-- scss:rules --*/
+
+body {
+  background-color: $dashboard-bg;
+}
+
+img {
+  border: 1px solid $image-border;
+}
+
+img {
+    border: 1px solid #032251;
+}
+.chart {
+  background-color: $chart-bg;
+}
